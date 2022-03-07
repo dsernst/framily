@@ -41,7 +41,7 @@ export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
           paddingVertical: 5,
         }}
       >
-        <Text style={{ fontSize: 15, fontWeight: '800', opacity: 0.6 }}>
+        <Text style={{ fontSize: 15, fontWeight: '300', opacity: 0.9 }}>
           Contacts
         </Text>
         <TouchableOpacity
