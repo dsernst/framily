@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ContactsScreen } from "./ContactsScreen"
 import { UpNextScreen } from "./UpNextScreen"
 import * as Contacts from "expo-contacts"
-export type Frequencies = Record<string, string>
+export type Frequencies = Record<string, string | undefined>
 
 export interface ScreenProps {
   frequencies: Frequencies

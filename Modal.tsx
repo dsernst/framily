@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { Modal, Text, View, Picker, TouchableOpacity } from "react-native"
+import { Modal, Text, View, TouchableOpacity } from "react-native"
+import { Picker } from "@react-native-picker/picker"
 import { Frequencies } from "./App"
 
 export const OurModal = ({
