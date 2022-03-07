@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, SectionList } from 'react-native'
 import { OurModal } from './Modal'
 import { ScreenProps } from '../App'
 import { useStorage } from '../useStorage'
+import { TopBar } from './TopBar'
 
 export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
   const [selectedContactId, setSelectedContactId] = useState<string | false>(
@@ -30,34 +31,7 @@ export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
   return (
     <View>
       <OurModal {...{ setSelectedContactId, selectedContactId }} />
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          paddingHorizontal: 10,
-          borderBottomWidth: 1,
-          borderColor: '#0003',
-          paddingVertical: 5,
-        }}
-      >
-        <Text style={{ fontSize: 15, fontWeight: '300', opacity: 0.9 }}>
-          Contacts
-        </Text>
-        <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: '#00a',
-            borderRadius: 5,
-            padding: 5,
-            paddingHorizontal: 10,
-            alignSelf: 'flex-end',
-          }}
-          onPress={switchScreen}
-        >
-          <Text style={{ fontWeight: '600', color: '#00a' }}>Done</Text>
-        </TouchableOpacity>
-      </View>
+      <TopBar {...{ switchScreen }} />
 
       <SectionList
         sections={data}
