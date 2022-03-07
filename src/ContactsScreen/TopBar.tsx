@@ -7,12 +7,10 @@ export const TopBar = ({ switchScreen }: { switchScreen: () => void }) => (
       justifyContent: 'space-between',
       flexDirection: 'row',
       paddingHorizontal: 10,
-      borderBottomWidth: 1,
-      borderColor: '#0003',
       paddingVertical: 5,
     }}
   >
-    <Text style={{ fontSize: 15, fontWeight: '300', opacity: 0.9 }}>
+    <Text style={{ fontSize: 15, fontWeight: '500', opacity: 0.6 }}>
       Contacts
     </Text>
     <TouchableOpacity
