@@ -3,7 +3,7 @@ import { Modal, Text, View, TouchableOpacity } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { useStorage } from '../useStorage'
 
-export const OurModal = ({
+export const ModalPicker = ({
   selectedContactId,
   setSelectedContactId,
 }: {
