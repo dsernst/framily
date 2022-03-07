@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { ContactsScreen } from "./ContactsScreen"
-import { UpNextScreen } from "./UpNextScreen"
-import * as Contacts from "expo-contacts"
-import { SafeAreaView } from "react-native"
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { ContactsScreen } from './ContactsScreen'
+import { UpNextScreen } from './UpNextScreen'
+import * as Contacts from 'expo-contacts'
+import { SafeAreaView } from 'react-native'
 export type Frequencies = Record<string, string | undefined>
 
 export interface ScreenProps {
@@ -20,7 +20,7 @@ export default function App() {
   useEffect(() => {
     ;(async () => {
       const { status } = await Contacts.requestPermissionsAsync()
-      if (status === "granted") {
+      if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
           sort: Contacts.SortTypes.FirstName,
         })
