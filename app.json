@@ -3,6 +3,7 @@
     "name": "framily",
     "slug": "framily",
     "version": "1.0.0",
+    "entryPoint": "src/App.tsx",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -13,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

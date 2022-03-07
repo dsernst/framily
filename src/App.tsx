@@ -5,13 +5,14 @@ import { UpNextScreen } from './UpNextScreen'
 import { SafeAreaView } from 'react-native'
 import { StorageProvider } from './useStorage'
 import { useContacts } from './useContacts'
+import { registerRootComponent } from 'expo'
 
 export interface ScreenProps {
   switchScreen: () => void
   contacts: ReturnType<typeof useContacts>
 }
 
-export default function App() {
+function App() {
   const [isOnContactsScreen, setIsOnContactsScreen] = useState(true)
   const contacts = useContacts()
 
@@ -29,3 +30,5 @@ export default function App() {
     </SafeAreaView>
   )
 }
+
+export default registerRootComponent(App)
