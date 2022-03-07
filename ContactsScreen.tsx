@@ -77,7 +77,7 @@ export function ContactsScreen({
             <Text style={{ fontSize: 18 }}>
               {firstName} {lastName}
             </Text>
-            <Text>{frequencies[id]}</Text>
+            <Text style={{ opacity: 0.4 }}>{frequencies[id]}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
