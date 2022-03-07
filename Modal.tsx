@@ -47,7 +47,7 @@ export const OurModal = ({
               "6 months",
               "1 year",
             ].map((val) => (
-              <Picker.Item label={val} value={val} />
+              <Picker.Item key={val} label={val} value={val} />
             ))}
           </Picker>
           <Pressable
