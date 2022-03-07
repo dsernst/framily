@@ -1,4 +1,5 @@
-import { usePersistStorage } from 'react-native-use-persist-storage'
+import { createPersistContext } from 'react-native-use-persist-storage'
+import { useContext } from 'react'
 
 export type Frequencies = Record<string, string | undefined>
 type State = {
@@ -6,13 +7,19 @@ type State = {
 }
 const initialState: State = { frequencies: {} }
 
-export const useStorage = () => {
-  const [state, setState, loaded] = usePersistStorage(
-    'storageKey',
-    initialState
-  )
+const context = createPersistContext({
+  storageKey: 'storageKey',
+  defaultData: initialState,
+})
 
-  const update = (diff: Record<string, any>) => setState({ ...state, ...diff })
+export const StorageProvider = context.Provider
+
+export const useStorage = () => {
+  const [state, setState, loaded] = useContext(context.Context)
+
+  const update = (diff: Record<string, any>) => {
+    setState((prev) => ({ ...prev, ...diff }))
+  }
 
   return { state, update, loaded }
 }

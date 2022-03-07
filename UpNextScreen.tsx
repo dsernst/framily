@@ -2,12 +2,13 @@ import { Contact } from 'expo-contacts'
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { ScreenProps } from './App'
+import { useStorage } from './useStorage'
 
-export function UpNextScreen({
-  contacts,
-  frequencies,
-  switchScreen,
-}: ScreenProps) {
+export function UpNextScreen({ contacts, switchScreen }: ScreenProps) {
+  const {
+    state: { frequencies },
+  } = useStorage()
+
   const contactsById = contacts.reduce(
     (memo, contact) => ({
       ...memo,

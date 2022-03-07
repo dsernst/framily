@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, SectionList } from 'react-native'
 import { OurModal } from './Modal'
 import { ScreenProps } from './App'
+import { useStorage } from './useStorage'
 
-export function ContactsScreen({
-  frequencies,
-  setFrequencies,
-  switchScreen,
-  contacts,
-}: ScreenProps) {
+export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
   const [selectedContactId, setSelectedContactId] = useState<string | false>(
     false
   )
+  const {
+    state: { frequencies },
+  } = useStorage()
 
   // Group contacts by first letter of last name
   const contactsGroupedByFirstLetter = contacts.reduce((memo, contact) => {
@@ -30,14 +29,7 @@ export function ContactsScreen({
 
   return (
     <View>
-      <OurModal
-        {...{
-          setSelectedContactId,
-          selectedContactId,
-          setFrequencies,
-          frequencies,
-        }}
-      />
+      <OurModal {...{ setSelectedContactId, selectedContactId }} />
       <View
         style={{
           alignItems: 'center',

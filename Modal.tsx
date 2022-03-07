@@ -6,14 +6,15 @@ import { Frequencies, useStorage } from './useStorage'
 export const OurModal = ({
   selectedContactId,
   setSelectedContactId,
-  setFrequencies,
-  frequencies,
 }: {
   selectedContactId: string | false
   setSelectedContactId: Dispatch<SetStateAction<string | false>>
-  setFrequencies: (newFrequencies: Frequencies) => void
-  frequencies: Frequencies
 }) => {
+  const {
+    state: { frequencies },
+    update,
+  } = useStorage()
+
   if (!selectedContactId) return null
   return (
     <Modal
@@ -52,10 +53,12 @@ export const OurModal = ({
             style={{ width: 300 }}
             selectedValue={frequencies[selectedContactId]}
             onValueChange={(itemValue) =>
-              setFrequencies({
-                ...frequencies,
-                [selectedContactId]:
-                  itemValue !== 'Not set' ? itemValue : undefined,
+              update({
+                frequencies: {
+                  ...frequencies,
+                  [selectedContactId]:
+                    itemValue !== 'Not set' ? itemValue : undefined,
+                },
               })
             }
           >
