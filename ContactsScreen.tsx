@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {
-  StyleSheet,
+  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
   ScrollView,
 } from "react-native"
-import * as Contacts from "expo-contacts"
 import { OurModal } from "./Modal"
 import { ScreenProps } from "./App"
 
@@ -25,7 +24,7 @@ export function ContactsScreen({
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
       <OurModal
         {...{
           setSelectedContactId,
@@ -34,40 +33,54 @@ export function ContactsScreen({
           frequencies,
         }}
       />
-      <TouchableOpacity style={styles.button} onPress={switchScreen}>
-        <Text>Done</Text>
-      </TouchableOpacity>
-      <ScrollView style={styles.scrollView}>
-        {contacts.slice(0, 100).map(({ firstName, lastName, id }) => (
-          <TouchableOpacity key={id} onPress={() => handlePress(id)}>
-            <Text>
-              {firstName} {lastName}: {frequencies[id]}
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexDirection: "row",
+          paddingHorizontal: 10,
+          borderBottomWidth: 1,
+          borderColor: "#0003",
+          paddingVertical: 5,
+        }}
+      >
+        <Text style={{ fontSize: 15, fontWeight: "800" }}>Contacts</Text>
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            borderColor: "#00a",
+            borderRadius: 5,
+            padding: 5,
+            paddingHorizontal: 10,
+            alignSelf: "flex-end",
+          }}
+          onPress={switchScreen}
+        >
+          <Text style={{ fontWeight: "600", color: "#00a" }}>Done</Text>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        style={{ width: "100%", paddingHorizontal: 10, paddingVertical: 10 }}
+      >
+        {contacts.map(({ firstName, lastName, id }) => (
+          <TouchableOpacity
+            style={{
+              marginVertical: 2,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+            key={id}
+            onPress={() => handlePress(id)}
+          >
+            <Text style={{ fontSize: 18 }}>
+              {firstName} {lastName}
             </Text>
+            <Text>{frequencies[id]}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Text>Contacts Module Example</Text>
-    </View>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  scrollView: {
-    minWidth: 250,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    padding: 5,
-    marginTop: 30,
-    marginRight: 20,
-    alignSelf: "flex-end",
-  },
-})
