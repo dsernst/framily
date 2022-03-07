@@ -24,7 +24,7 @@ export function ContactsScreen({
   }
 
   return (
-    <SafeAreaView>
+    <View>
       <OurModal
         {...{
           setSelectedContactId,
@@ -81,6 +81,6 @@ export function ContactsScreen({
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }

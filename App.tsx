@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ContactsScreen } from "./ContactsScreen"
 import { UpNextScreen } from "./UpNextScreen"
 import * as Contacts from "expo-contacts"
+import { SafeAreaView } from "react-native"
 export type Frequencies = Record<string, string | undefined>
 
 export interface ScreenProps {
@@ -31,13 +32,18 @@ export default function App() {
   function switchScreen() {
     setIsOnContactsScreen(!isOnContactsScreen)
   }
-  return isOnContactsScreen ? (
-    <ContactsScreen
-      {...{ switchScreen, frequencies, setFrequencies, contacts }}
-    />
-  ) : (
-    <UpNextScreen
-      {...{ switchScreen, frequencies, setFrequencies, contacts }}
-    />
+
+  return (
+    <SafeAreaView>
+      {isOnContactsScreen ? (
+        <ContactsScreen
+          {...{ switchScreen, frequencies, setFrequencies, contacts }}
+        />
+      ) : (
+        <UpNextScreen
+          {...{ switchScreen, frequencies, setFrequencies, contacts }}
+        />
+      )}
+    </SafeAreaView>
   )
 }
