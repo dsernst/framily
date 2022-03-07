@@ -39,11 +39,13 @@ export function UpNextScreen({ contacts, switchScreen }: ScreenProps) {
         Who to contact next?
       </Text>
       <View style={{ justifyContent: 'center' }}>
-        {Object.keys(frequencies).map((id) => (
-          <Text
-            key={id}
-          >{`${contactsById[id].firstName} ${contactsById[id].lastName}: ${frequencies[id]}`}</Text>
-        ))}
+        {Object.keys(frequencies)
+          .filter((id) => frequencies[id])
+          .map((id) => (
+            <Text
+              key={id}
+            >{`${contactsById[id].firstName} ${contactsById[id].lastName}: ${frequencies[id]}`}</Text>
+          ))}
       </View>
     </View>
   )
