@@ -21,7 +21,7 @@ export default function App() {
       const { status } = await Contacts.requestPermissionsAsync()
       if (status === "granted") {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails],
+          sort: Contacts.SortTypes.FirstName,
         })
 
         if (data.length > 0) setContacts(data)
