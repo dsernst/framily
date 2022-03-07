@@ -69,17 +69,17 @@ export function ContactsScreen({
 
       <SectionList
         sections={data}
+        style={{ height: '100%' }}
         keyExtractor={({ id }) => id}
         renderItem={({ item: { id, firstName, lastName } }) => (
           <TouchableOpacity
             style={{
-              marginVertical: 2,
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: 12,
               borderBottomWidth: 1,
-              borderBottomColor: '#0002',
+              borderColor: '#0001',
             }}
             key={id}
             onPress={() => setSelectedContactId(id)}
@@ -91,18 +91,19 @@ export function ContactsScreen({
           </TouchableOpacity>
         )}
         renderSectionHeader={({ section: { letter } }) => (
-          <Text
+          <View
             style={{
+              borderBottomWidth: 1,
+              borderColor: '#0001',
               backgroundColor: '#f3f3f3',
-              color: '#0006',
-              fontSize: 16,
-              fontWeight: '600',
               paddingHorizontal: 10,
               paddingVertical: 2,
             }}
           >
-            {letter}
-          </Text>
+            <Text style={{ color: '#0006', fontSize: 16, fontWeight: '600' }}>
+              {letter}
+            </Text>
+          </View>
         )}
       />
     </View>
