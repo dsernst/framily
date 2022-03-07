@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, SectionList } from 'react-native'
 import { OurModal } from './Modal'
-import { ScreenProps } from './App'
-import { useStorage } from './useStorage'
+import { ScreenProps } from '../App'
+import { useStorage } from '../useStorage'
 
 export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
   const [selectedContactId, setSelectedContactId] = useState<string | false>(

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ContactsScreen } from './ContactsScreen'
+import { ContactsScreen } from './ContactsScreen/ContactsScreen'
 import { UpNextScreen } from './UpNextScreen'
 
 import { SafeAreaView } from 'react-native'
