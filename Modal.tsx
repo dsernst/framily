@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { Modal, Text, View, TouchableOpacity } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
-import { Frequencies } from './App'
+import { Frequencies, useStorage } from './useStorage'
 
 export const OurModal = ({
   selectedContactId,
@@ -11,7 +11,7 @@ export const OurModal = ({
 }: {
   selectedContactId: string | false
   setSelectedContactId: Dispatch<SetStateAction<string | false>>
-  setFrequencies: Dispatch<SetStateAction<Frequencies>>
+  setFrequencies: (newFrequencies: Frequencies) => void
   frequencies: Frequencies
 }) => {
   if (!selectedContactId) return null

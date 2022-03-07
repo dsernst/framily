@@ -1,21 +1,25 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ContactsScreen } from './ContactsScreen'
 import { UpNextScreen } from './UpNextScreen'
 import * as Contacts from 'expo-contacts'
 import { SafeAreaView } from 'react-native'
-export type Frequencies = Record<string, string | undefined>
+import { Frequencies, useStorage } from './useStorage'
 
 export interface ScreenProps {
   frequencies: Frequencies
-  setFrequencies: Dispatch<SetStateAction<Frequencies>>
+  setFrequencies: (newFrequencies: Frequencies) => void
   switchScreen: () => void
   contacts: Contacts.Contact[]
 }
 
 export default function App() {
-  const [frequencies, setFrequencies] = useState<Frequencies>({})
   const [isOnContactsScreen, setIsOnContactsScreen] = useState(true)
   const [contacts, setContacts] = useState<Contacts.Contact[]>([])
+  const { state, update, loaded } = useStorage()
+  const { frequencies } = state
+  const setFrequencies = (newFrequencies: Frequencies) => {
+    update({ frequencies: newFrequencies })
+  }
 
   useEffect(() => {
     ;(async () => {
@@ -29,9 +33,7 @@ export default function App() {
       }
     })()
   }, [])
-  function switchScreen() {
-    setIsOnContactsScreen(!isOnContactsScreen)
-  }
+  const switchScreen = () => setIsOnContactsScreen(!isOnContactsScreen)
 
   return (
     <SafeAreaView>
