@@ -75,7 +75,7 @@ export const ModalPicker = ({
               >
                 {options.map((val) => (
                   <Picker.Item
-                    key={val}
+                    key={val || 0}
                     label={daysToString(val)}
                     value={val}
                   />
