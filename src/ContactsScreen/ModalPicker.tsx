@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker'
 import { useStorage } from '../useStorage'
 import { Selected } from './ContactsScreen'
 import { Set } from '../utils'
+import { options, daysToString } from '../durations'
 
 export const ModalPicker = ({
   selected,
@@ -66,23 +67,18 @@ export const ModalPicker = ({
                   update({
                     frequencies: {
                       ...frequencies,
-                      [selected.id]:
-                        itemValue !== 'Not set' ? itemValue : undefined,
+                      [selected.id]: itemValue,
                     },
                   })
                   setSelected(false)
                 }}
               >
-                {[
-                  'Not set',
-                  '1 week',
-                  '2 weeks',
-                  '1 month',
-                  '3 months',
-                  '6 months',
-                  '1 year',
-                ].map((val) => (
-                  <Picker.Item key={val} label={val} value={val} />
+                {options.map((val) => (
+                  <Picker.Item
+                    key={val}
+                    label={daysToString(val)}
+                    value={val}
+                  />
                 ))}
               </Picker>
             </View>

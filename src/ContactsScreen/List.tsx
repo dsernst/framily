@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, SectionList } from 'react-native'
 import { useStorage } from '../useStorage'
 import { Selected } from './ContactsScreen'
 import { Set } from '../utils'
+import { daysToString } from '../durations'
 
 export const List = ({
   contacts,
@@ -53,7 +54,12 @@ export const List = ({
             <Text style={{ fontSize: 18 }}>
               {firstName} <Text style={{ fontWeight: '600' }}>{lastName}</Text>
             </Text>
-            <Text style={{ opacity: 0.4 }}>{frequencies[id]}</Text>
+
+            {frequencies[id] && (
+              <Text style={{ opacity: 0.4 }}>
+                {daysToString(frequencies[id])}
+              </Text>
+            )}
           </TouchableOpacity>
         )
       }}

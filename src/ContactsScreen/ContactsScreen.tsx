@@ -16,8 +16,8 @@ export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
   return (
     <View>
       <TopBar {...{ switchScreen }} />
-
       <SearchBar {...{ search, setSearch }} />
+
       <List {...{ contacts: filtered, setSelected }} />
 
       <ModalPicker {...{ setSelected, selected }} />

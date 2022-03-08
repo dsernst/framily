@@ -1,7 +1,7 @@
 import { createPersistContext } from 'react-native-use-persist-storage'
 import { useContext } from 'react'
 
-export type Frequencies = Record<string, string | undefined>
+export type Frequencies = Record<string, number | undefined>
 type State = {
   frequencies: Frequencies
 }

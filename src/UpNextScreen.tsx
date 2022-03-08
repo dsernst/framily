@@ -2,6 +2,7 @@ import { Contact } from 'expo-contacts'
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { ScreenProps } from './App'
+import { daysToString } from './durations'
 import { useStorage } from './useStorage'
 
 export function UpNextScreen({ contacts, switchScreen }: ScreenProps) {
@@ -41,10 +42,11 @@ export function UpNextScreen({ contacts, switchScreen }: ScreenProps) {
       <View style={{ justifyContent: 'center' }}>
         {Object.keys(frequencies)
           .filter((id) => frequencies[id])
+          .sort((a, b) => frequencies[a]! - frequencies[b]!)
           .map((id) => (
-            <Text
-              key={id}
-            >{`${contactsById[id].firstName} ${contactsById[id].lastName}: ${frequencies[id]}`}</Text>
+            <Text key={id}>{`${contactsById[id].firstName} ${
+              contactsById[id].lastName
+            }: ${daysToString(frequencies[id])}`}</Text>
           ))}
       </View>
     </View>
