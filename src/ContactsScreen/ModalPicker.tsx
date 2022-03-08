@@ -20,8 +20,7 @@ export const ModalPicker = ({
   if (!selected) return null
   return (
     <Modal
-      animationType="slide"
-      transparent={true}
+      transparent
       visible={!!selected}
       onRequestClose={() => {
         setSelected(false)
@@ -30,6 +29,7 @@ export const ModalPicker = ({
       <View
         style={{
           flex: 1,
+          backgroundColor: '#000c',
           justifyContent: 'center',
           alignItems: 'center',
         }}
