@@ -5,11 +5,11 @@ import { ScreenProps } from '../App'
 import { TopBar } from './TopBar'
 import { List } from './List'
 import { SearchBar, useSearch } from './SearchBar'
+import { Contact } from 'expo-contacts'
 
+export type Selected = Contact | false
 export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
-  const [selectedContactId, setSelectedContactId] = useState<string | false>(
-    false
-  )
+  const [selected, setSelected] = useState<Selected>(false)
 
   const { filtered, search, setSearch } = useSearch(contacts)
 
@@ -18,9 +18,9 @@ export function ContactsScreen({ switchScreen, contacts }: ScreenProps) {
       <TopBar {...{ switchScreen }} />
 
       <SearchBar {...{ search, setSearch }} />
-      <List {...{ contacts: filtered, setSelectedContactId }} />
+      <List {...{ contacts: filtered, setSelected }} />
 
-      <ModalPicker {...{ setSelectedContactId, selectedContactId }} />
+      <ModalPicker {...{ setSelected, selected }} />
     </View>
   )
 }

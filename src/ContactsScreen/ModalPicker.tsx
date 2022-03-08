@@ -1,28 +1,30 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import { Modal, Text, View, TouchableOpacity } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { useStorage } from '../useStorage'
+import { Selected } from './ContactsScreen'
+import { Set } from '../utils'
 
 export const ModalPicker = ({
-  selectedContactId,
-  setSelectedContactId,
+  selected,
+  setSelected,
 }: {
-  selectedContactId: string | false
-  setSelectedContactId: Dispatch<SetStateAction<string | false>>
+  selected: Selected
+  setSelected: Set<Selected>
 }) => {
   const {
     state: { frequencies },
     update,
   } = useStorage()
 
-  if (!selectedContactId) return null
+  if (!selected) return null
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={!!selectedContactId}
+      visible={!!selected}
       onRequestClose={() => {
-        setSelectedContactId(false)
+        setSelected(false)
       }}
     >
       <View
@@ -47,16 +49,27 @@ export const ModalPicker = ({
             shadowRadius: 4,
           }}
         >
-          <Text style={{ fontSize: 18 }}>Minimum time till catchup?</Text>
+          <Text
+            style={{
+              fontSize: 18,
+              marginBottom: 20,
+              fontWeight: '600',
+              opacity: 0.8,
+            }}
+          >
+            {selected.firstName} {selected.lastName}
+          </Text>
+
+          <Text style={{ fontSize: 14 }}>Minimum time till catchup?</Text>
           <Picker
             itemStyle={{ color: 'grey' }}
             style={{ width: 300 }}
-            selectedValue={frequencies[selectedContactId]}
+            selectedValue={frequencies[selected.id]}
             onValueChange={(itemValue) =>
               update({
                 frequencies: {
                   ...frequencies,
-                  [selectedContactId]:
+                  [selected.id]:
                     itemValue !== 'Not set' ? itemValue : undefined,
                 },
               })
@@ -83,7 +96,7 @@ export const ModalPicker = ({
               backgroundColor: '#2196F3',
             }}
             activeOpacity={0.7}
-            onPress={() => setSelectedContactId(false)}
+            onPress={() => setSelected(false)}
           >
             <Text
               style={{

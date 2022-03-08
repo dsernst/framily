@@ -1,13 +1,15 @@
 import { Contact } from 'expo-contacts'
 import { View, Text, TouchableOpacity, SectionList } from 'react-native'
 import { useStorage } from '../useStorage'
+import { Selected } from './ContactsScreen'
+import { Set } from '../utils'
 
 export const List = ({
   contacts,
-  setSelectedContactId,
+  setSelected,
 }: {
   contacts: Contact[]
-  setSelectedContactId: (id: string) => void
+  setSelected: Set<Selected>
 }) => {
   const {
     state: { frequencies },
@@ -23,35 +25,38 @@ export const List = ({
     memo[firstLetter].push(contact)
     return memo
   }, {} as Record<string, typeof contacts>)
-  const data = Object.keys(contactsGroupedByFirstLetter).map((letter) => ({
+  const sections = Object.keys(contactsGroupedByFirstLetter).map((letter) => ({
     letter,
     data: contactsGroupedByFirstLetter[letter],
   }))
 
   return (
     <SectionList
-      sections={data}
+      sections={sections}
       style={{ height: '100%' }}
       keyExtractor={({ id }) => id}
-      renderItem={({ item: { id, firstName, lastName } }) => (
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: 12,
-            borderBottomWidth: 1,
-            borderColor: '#0001',
-          }}
-          key={id}
-          onPress={() => setSelectedContactId(id)}
-        >
-          <Text style={{ fontSize: 18 }}>
-            {firstName} <Text style={{ fontWeight: '600' }}>{lastName}</Text>
-          </Text>
-          <Text style={{ opacity: 0.4 }}>{frequencies[id]}</Text>
-        </TouchableOpacity>
-      )}
+      renderItem={({ item }) => {
+        const { id, firstName, lastName } = item
+        return (
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: 12,
+              borderBottomWidth: 1,
+              borderColor: '#0001',
+            }}
+            key={id}
+            onPress={() => setSelected(item)}
+          >
+            <Text style={{ fontSize: 18 }}>
+              {firstName} <Text style={{ fontWeight: '600' }}>{lastName}</Text>
+            </Text>
+            <Text style={{ opacity: 0.4 }}>{frequencies[id]}</Text>
+          </TouchableOpacity>
+        )
+      }}
       renderSectionHeader={({ section: { letter } }) => (
         <View
           style={{
