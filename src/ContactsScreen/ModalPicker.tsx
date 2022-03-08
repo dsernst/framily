@@ -51,7 +51,7 @@ export const ModalPicker = ({
         >
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 20,
               marginBottom: 20,
               fontWeight: '600',
               opacity: 0.8,
@@ -65,7 +65,7 @@ export const ModalPicker = ({
             itemStyle={{ color: 'grey' }}
             style={{ width: 300 }}
             selectedValue={frequencies[selected.id]}
-            onValueChange={(itemValue) =>
+            onValueChange={(itemValue) => {
               update({
                 frequencies: {
                   ...frequencies,
@@ -73,7 +73,8 @@ export const ModalPicker = ({
                     itemValue !== 'Not set' ? itemValue : undefined,
                 },
               })
-            }
+              setSelected(false)
+            }}
           >
             {[
               'Not set',
@@ -93,7 +94,7 @@ export const ModalPicker = ({
               paddingVertical: 10,
               width: 280,
               elevation: 2,
-              backgroundColor: '#2196F3',
+              backgroundColor: '#2196F3aa',
             }}
             activeOpacity={0.7}
             onPress={() => setSelected(false)}
@@ -105,7 +106,7 @@ export const ModalPicker = ({
                 textAlign: 'center',
               }}
             >
-              Back
+              Cancel
             </Text>
           </TouchableOpacity>
         </View>
